@@ -67,6 +67,11 @@ input[type="text"] {
   margin-right: 10px;
 }
 
+.input:focus {
+  border-color: red;
+}
+
+
 button[type="submit"] {
   padding: 10px;
   font-size: 16px;
@@ -122,4 +127,49 @@ button[type="submit"]:hover {
   border-radius: 10px;
   align-self: flex-start;
   margin-bottom: 5px;
+}
+
+
+.loader {
+  position: relative;
+  width: 200px;
+  height: 120px;
+  margin: 0 auto 0 auto;
+}
+
+.loader:before,
+.loader:after {
+  content: "생각즁";
+  font-size: 9px;
+  box-sizing: border-box;
+  position: absolute;
+  /* top: 50%; */
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  /* margin-top: -75px; */
+  /* margin-left: -75px; */
+  border-radius: 50%;
+  border: 10px solid rgb(239, 95, 66);
+  border-top-color: #35c4a3;
+  animation: loader 1s ease-in-out infinite;
+}
+
+
+@keyframes loader {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-text {
+  0% {
+    transform: translate(-50%, -80%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -80%) rotate(360deg);
+  }
 }

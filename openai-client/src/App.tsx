@@ -4,9 +4,11 @@ import './App.css';
 function App() {
   const [message, setMessage] = useState('');
   const [conversation, setConversation] = useState<{ question: string, response: any }[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
 
     const requestOptions = {
       method: 'POST',
@@ -15,6 +17,8 @@ function App() {
     };
     const res = await fetch('http://localhost:3001/', requestOptions);
     const data = await res.json();
+    setLoading(false);
+
     const newMessage = { question: message, response: data.message };
     setConversation([newMessage, ...conversation]);
     setMessage('');
@@ -28,6 +32,7 @@ function App() {
           id="message"
           type="text"
           value={message}
+          className="input"
           onChange={(e) => setMessage(e.target.value)}
           required
         />
@@ -35,9 +40,10 @@ function App() {
       </form>
       <div className='container'>
         <div className='message-container'>
+        {loading && <div className="loader"></div>}
       {conversation.map((message, index) => (
         <div key={index} className="message">
-          <div className="response">
+          <div style={{ whiteSpace: 'pre-wrap' }} className="response">
             <b>블링이:</b> {message.response}
           </div>
           <div className="question">
